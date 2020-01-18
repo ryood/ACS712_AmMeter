@@ -1,6 +1,6 @@
 #include <TimerOne.h>
 
-#define PIN_BUZZER  (8)
+#define PIN_BUZZER  (10)
 
 void beep()
 {

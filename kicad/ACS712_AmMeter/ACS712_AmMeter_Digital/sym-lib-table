@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name ACS712_AmMeter-rescue)(type Legacy)(uri ${KIPRJMOD}/ACS712_AmMeter-rescue.lib)(options "")(descr ""))
+)

@@ -1,0 +1,20 @@
+Circuit: * E:\Users\nerdfloor\Documents\Develop\ACS712_AmMeter\spice\Noise_Filter_03.asc
+
+Direct Newton iteration for .op point succeeded.
+
+Date: Thu Jan 09 21:11:26 2020
+Total elapsed time: 0.104 seconds.
+
+tnom = 27
+temp = 27
+method = trap
+totiter = 3
+traniter = 0
+tranpoints = 0
+accept = 0
+rejected = 0
+matrix size = 10
+fillins = 2
+solver = Normal
+Matrix Compiler1:      25 opcodes
+Matrix Compiler2: 854 bytes object code size
