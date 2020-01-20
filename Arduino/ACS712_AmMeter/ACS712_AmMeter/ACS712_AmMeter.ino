@@ -1,5 +1,5 @@
 // ACS712 AmMeter
-// 2020.01.09
+// 2020.01.20
 //
 // ryood
 
@@ -17,7 +17,7 @@
 
 #define BUFFER_SIZE  (20)
 #define DISPLAY_INTERVAL  (32)
-#define PIN_BUZZER  (8)
+#define PIN_BUZZER  (10)
 
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
 
