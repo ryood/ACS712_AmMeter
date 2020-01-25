@@ -1,5 +1,5 @@
 // ACS712 AmMeter
-// 2020.01.20
+// 2020.01.25
 //
 // ryood
 
@@ -17,7 +17,8 @@
 
 #define BUFFER_SIZE  (20)
 #define DISPLAY_INTERVAL  (32)
-#define PIN_BUZZER  (10)
+#define PIN_BUZZER  (11)
+#define PIN_CAL_SW  (10)
 
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
 
@@ -26,29 +27,12 @@ int buffer1[BUFFER_SIZE];
 int buffer2[BUFFER_SIZE];
 int bufferIndex = 0;
 
+int biasPositive = 0;
+int biasNegative = 0;
+
 int count = 0;
 
-void beep()
-{
-  tone(PIN_BUZZER, 1000, 50);
-}
-
-void setup()
-{
-  // リング・バッファを初期化
-  for (int i = 0; i < BUFFER_SIZE; i++) {
-    buffer0[i] = 512;
-    buffer1[i] = 512;
-    buffer2[i] = 512;
-  }
-  u8g2.begin();
-  
-#if (SERIAL_TX)  
-  Serial.begin(9600);
-#endif //(SERIAL_TX)
-}
-
-void loop()
+void readValue(long *raw0, long *raw1, long *raw2)
 {
   buffer0[bufferIndex] = analogRead(0);
   buffer1[bufferIndex] = analogRead(1);
@@ -66,23 +50,67 @@ void loop()
     sum2 += buffer2[i];
   }
 
-  long raw0 = sum0 / BUFFER_SIZE;
-  long raw1 = sum1 / BUFFER_SIZE;
-  long raw2 = sum2 / BUFFER_SIZE;
+  *raw0 = sum0 / BUFFER_SIZE;
+  *raw1 = sum1 / BUFFER_SIZE;
+  *raw2 = sum2 / BUFFER_SIZE;
+}
+
+void calibration()
+{
+  long raw0;
+  long raw1;
+  long raw2;
+
+  for (int i = 0; i < BUFFER_SIZE; i++) {
+    readValue(&raw0, &raw1, &raw2);
+  }
+
+  biasPositive = 512 - raw0;
+  biasNegative = 512 - raw1;
+}
+
+void beep()
+{
+  tone(PIN_BUZZER, 1000, 50);
+}
+
+void setup()
+{
+  // リング・バッファを初期化
+  for (int i = 0; i < BUFFER_SIZE; i++) {
+    buffer0[i] = 512;
+    buffer1[i] = 512;
+    buffer2[i] = 512;
+  }
+
+  pinMode(PIN_CAL_SW, INPUT_PULLUP);
+  
+  u8g2.begin();
+  u8g2.setFlipMode(1);
+  
+#if (SERIAL_TX)  
+  Serial.begin(9600);
+#endif //(SERIAL_TX)
+}
+
+void loop()
+{
+  if (digitalRead(PIN_CAL_SW) == LOW) {
+    calibration();
+  }
+  
+  long raw0;
+  long raw1;
+  long raw2;
+  
+  readValue(&raw0, &raw1, &raw2);
     
-  int v0 = raw0 * VREF / 1024;
-  int v1 = raw1 * VREF / 1024;
+  int v0 = (raw0 * VREF / 1024) + biasPositive;
+  int v1 = (raw1 * VREF / 1024) + biasNegative;
   int v2 = raw2 * VREF / 1024;
   
   int c0 = -(v0 - 2500) / 5; 
   int c1 = -(v1 - 2500) / 5;
-
-  /*
-  // accuracy: 2mA
-  c0 = (c0 + 1) >> 1 << 1;
-  c1 = (c1 + 1) >> 1 << 1;
-  */
-  
   int pwrv = v2 * PWR_V_DIV;
 
   count++;
@@ -101,10 +129,18 @@ void loop()
     char strBuffer0[16];
     char strBuffer1[16];
     char strBuffer2[16];
+    
     sprintf(strBuffer0, "%+04dmA", c0);
     sprintf(strBuffer1, "%+04dmA", c1);
-    sprintf(strBuffer2, "BATT:%4dmV", pwrv);
+    sprintf(strBuffer2, "%4dmV %+3d %+3d", pwrv, biasPositive, biasNegative);
 
+/*
+    //読み取り直値表示
+    sprintf(strBuffer0, "%d", raw0);
+    sprintf(strBuffer1, "%d", raw1);
+    sprintf(strBuffer2, "%d %d %d", raw2, biasPositive, biasNegative);
+*/
+    
     u8g2.clearBuffer();
     u8g2.setFont(u8g2_font_profont29_mf);
     u8g2.drawStr(0, 20, strBuffer0);

@@ -1,14 +1,13 @@
 EESchema Schematic File Version 4
 LIBS:ACS712_AmMeter-cache
-LIBS:ACS712_AmMeter_Analog-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "ACS712_AmMeter_Digital_Board"
-Date "2020-01-19"
-Rev "Ver. 0.91"
+Date "2020-01-25"
+Rev "Ver. 0.92"
 Comp "PNPN Manufactory"
 Comment1 ""
 Comment2 ""
@@ -17,14 +16,6 @@ Comment4 ""
 $EndDescr
 Wire Wire Line
 	2700 5450 2900 5450
-Wire Wire Line
-	2700 5350 2900 5350
-NoConn ~ 2800 4550
-NoConn ~ 2700 4550
-NoConn ~ 2600 4550
-NoConn ~ 2500 4550
-NoConn ~ 2400 4550
-NoConn ~ 2300 4550
 NoConn ~ 1700 5050
 NoConn ~ 1700 5150
 NoConn ~ 1700 5250
@@ -36,7 +27,6 @@ NoConn ~ 1700 5750
 NoConn ~ 1700 5850
 NoConn ~ 1700 5950
 NoConn ~ 1700 6150
-NoConn ~ 3400 6050
 NoConn ~ 3400 5950
 NoConn ~ 3400 5850
 NoConn ~ 3400 5450
@@ -44,17 +34,6 @@ NoConn ~ 3400 5250
 NoConn ~ 3400 5050
 NoConn ~ 2700 5650
 NoConn ~ 2700 5750
-$Comp
-L ACS712_AmMeter-rescue:Arduino_PRO-MINI-2-ArduinoProMini-eagle-import A1
-U 1 1 5E1A783C
-P 2600 5550
-F 0 "A1" H 1950 6400 50  0000 C CNN
-F 1 "Arduino_PRO-MINI-2" H 2300 4700 50  0000 C CNN
-F 2 "ArduinoProMini:PRO-MINI-2" H 2600 5550 50  0001 C CNN
-F 3 "" H 2600 5550 50  0001 C CNN
-	1    2600 5550
-	1    0    0    -1  
-$EndComp
 $Comp
 L mylib:OLED_SSD1306_I2C U3
 U 1 1 5E19927E
@@ -106,7 +85,7 @@ L Device:R R4
 U 1 1 5E1C7BC0
 P 5400 5150
 F 0 "R4" H 5470 5196 50  0000 L CNN
-F 1 "4.7k" H 5470 5105 50  0000 L CNN
+F 1 "2.2k" H 5470 5105 50  0000 L CNN
 F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 5330 5150 50  0001 C CNN
 F 3 "~" H 5400 5150 50  0001 C CNN
 	1    5400 5150
@@ -117,7 +96,7 @@ L Device:R R5
 U 1 1 5E1C8531
 P 5700 5150
 F 0 "R5" H 5770 5196 50  0000 L CNN
-F 1 "4.7k" H 5770 5105 50  0000 L CNN
+F 1 "2.2k" H 5770 5105 50  0000 L CNN
 F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 5630 5150 50  0001 C CNN
 F 3 "~" H 5700 5150 50  0001 C CNN
 	1    5700 5150
@@ -148,12 +127,12 @@ Connection ~ 5700 5400
 $Comp
 L Device:Buzzer BZ1
 U 1 1 5E3F79F4
-P 3800 6250
-F 0 "BZ1" H 3805 6540 50  0000 C CNN
-F 1 "Buzzer" H 3805 6449 50  0000 C CNN
-F 2 "Buzzer_Beeper:Buzzer_12x9.5RM7.6" V 3775 6350 50  0001 C CNN
-F 3 "~" V 3775 6350 50  0001 C CNN
-	1    3800 6250
+P 4050 6150
+F 0 "BZ1" H 4055 6440 50  0000 C CNN
+F 1 "Buzzer" H 4055 6349 50  0000 C CNN
+F 2 "Buzzer_Beeper:Buzzer_12x9.5RM7.6" V 4025 6250 50  0001 C CNN
+F 3 "~" V 4025 6250 50  0001 C CNN
+	1    4050 6150
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -218,13 +197,6 @@ Wire Wire Line
 Wire Wire Line
 	5150 5500 5150 5600
 NoConn ~ 1700 6050
-Wire Wire Line
-	3400 6150 3700 6150
-Wire Wire Line
-	3700 6350 3500 6350
-Connection ~ 3500 6350
-Wire Wire Line
-	3500 6350 3500 6500
 $Comp
 L Device:D_Schottky D2
 U 1 1 5E1D0F6B
@@ -286,7 +258,7 @@ U 1 1 5E1D9CB0
 P 4000 2800
 F 0 "U1" H 4000 3065 50  0000 C CNN
 F 1 "NJM2396" H 4000 2974 50  0000 C CNN
-F 2 "Package_TO_SOT_THT:TO-220-4_Horizontal_TabDown" H 4000 3050 50  0001 C CNN
+F 2 "myfootprint:NJM2396_Vertical" H 4000 3050 50  0001 C CNN
 F 3 "https://www.njr.co.jp/products/semicon/PDF/old_pdf/NJM2396_J.pdf" H 4000 2800 50  0001 C CNN
 	1    4000 2800
 	1    0    0    -1  
@@ -1013,13 +985,11 @@ Wire Wire Line
 Wire Wire Line
 	3850 5450 3500 5450
 Connection ~ 3500 5450
-Wire Wire Line
-	3500 5450 3500 6350
 Text GLabel 4000 5550 2    50   Input ~ 0
 V_BATT
-Text GLabel 4000 5650 2    50   Input ~ 0
-V_NEG
 Text GLabel 4000 5750 2    50   Input ~ 0
+V_NEG
+Text GLabel 4000 5650 2    50   Input ~ 0
 V_POS
 $Comp
 L Connector_Generic:Conn_01x03 J4
@@ -1076,12 +1046,12 @@ Wire Wire Line
 $Comp
 L power:GNDD #PWR08
 U 1 1 5E377BD9
-P 3500 6500
-F 0 "#PWR08" H 3500 6250 50  0001 C CNN
-F 1 "GNDD" H 3504 6345 50  0000 C CNN
-F 2 "" H 3500 6500 50  0001 C CNN
-F 3 "" H 3500 6500 50  0001 C CNN
-	1    3500 6500
+P 3500 6850
+F 0 "#PWR08" H 3500 6600 50  0001 C CNN
+F 1 "GNDD" H 3504 6695 50  0000 C CNN
+F 2 "" H 3500 6850 50  0001 C CNN
+F 3 "" H 3500 6850 50  0001 C CNN
+	1    3500 6850
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1127,4 +1097,48 @@ Wire Wire Line
 	7450 4850 7450 5000
 Wire Wire Line
 	7500 3100 7550 3100
+$Comp
+L mylib:Arduino_PRO-MINI-2-ArduinoProMini-simple A1
+U 1 1 5E28BA03
+P 2600 5550
+F 0 "A1" H 2550 6515 50  0000 C CNN
+F 1 "Arduino_PRO-MINI-2-ArduinoProMini-simple" H 2550 6424 50  0000 C CNN
+F 2 "myfootprint:Arduino-PRO-MINI-2-simple" H 2600 5550 50  0001 C CNN
+F 3 "" H 2600 5550 50  0001 C CNN
+	1    2600 5550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2700 5350 2900 5350
+Wire Wire Line
+	3400 6050 3950 6050
+$Comp
+L Connector_Generic:Conn_01x02 J6
+U 1 1 5E2C9B1F
+P 4100 6550
+F 0 "J6" H 4018 6767 50  0000 C CNN
+F 1 "CONFIG_SW" H 4018 6676 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 4100 6550 50  0001 C CNN
+F 3 "~" H 4100 6550 50  0001 C CNN
+	1    4100 6550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3800 6150 3800 6550
+Wire Wire Line
+	3800 6550 3900 6550
+Wire Wire Line
+	3400 6150 3800 6150
+Wire Wire Line
+	3900 6650 3500 6650
+Connection ~ 3500 6650
+Wire Wire Line
+	3500 6650 3500 6850
+Wire Wire Line
+	3500 5450 3500 6250
+Wire Wire Line
+	3950 6250 3500 6250
+Connection ~ 3500 6250
+Wire Wire Line
+	3500 6250 3500 6650
 $EndSCHEMATC
