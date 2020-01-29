@@ -6,8 +6,8 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "ACS712_AmMeter_Digital_Board"
-Date "2020-01-25"
-Rev "Ver. 0.92"
+Date "2020-01-27"
+Rev "Ver. 0.93"
 Comp "PNPN Manufactory"
 Comment1 ""
 Comment2 ""
@@ -138,45 +138,45 @@ $EndComp
 $Comp
 L Mechanical:MountingHole H1
 U 1 1 5E40C003
-P 3400 1250
-F 0 "H1" H 3500 1296 50  0000 L CNN
-F 1 "MountingHole" H 3500 1205 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 3400 1250 50  0001 C CNN
-F 3 "~" H 3400 1250 50  0001 C CNN
-	1    3400 1250
+P 4300 1250
+F 0 "H1" H 4400 1296 50  0000 L CNN
+F 1 "MountingHole" H 4400 1205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 4300 1250 50  0001 C CNN
+F 3 "~" H 4300 1250 50  0001 C CNN
+	1    4300 1250
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H2
 U 1 1 5E40C738
-P 3400 1500
-F 0 "H2" H 3500 1546 50  0000 L CNN
-F 1 "MountingHole" H 3500 1455 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 3400 1500 50  0001 C CNN
-F 3 "~" H 3400 1500 50  0001 C CNN
-	1    3400 1500
+P 4300 1500
+F 0 "H2" H 4400 1546 50  0000 L CNN
+F 1 "MountingHole" H 4400 1455 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 4300 1500 50  0001 C CNN
+F 3 "~" H 4300 1500 50  0001 C CNN
+	1    4300 1500
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H3
 U 1 1 5E40CD16
-P 4150 1250
-F 0 "H3" H 4250 1296 50  0000 L CNN
-F 1 "MountingHole" H 4250 1205 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 4150 1250 50  0001 C CNN
-F 3 "~" H 4150 1250 50  0001 C CNN
-	1    4150 1250
+P 5050 1250
+F 0 "H3" H 5150 1296 50  0000 L CNN
+F 1 "MountingHole" H 5150 1205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 5050 1250 50  0001 C CNN
+F 3 "~" H 5050 1250 50  0001 C CNN
+	1    5050 1250
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H4
 U 1 1 5E40D241
-P 4150 1500
-F 0 "H4" H 4250 1546 50  0000 L CNN
-F 1 "MountingHole" H 4250 1455 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 4150 1500 50  0001 C CNN
-F 3 "~" H 4150 1500 50  0001 C CNN
-	1    4150 1500
+P 5050 1500
+F 0 "H4" H 5150 1546 50  0000 L CNN
+F 1 "MountingHole" H 5150 1455 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 5050 1500 50  0001 C CNN
+F 3 "~" H 5050 1500 50  0001 C CNN
+	1    5050 1500
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -214,7 +214,7 @@ U 1 1 5E1D17AD
 P 1750 2800
 F 0 "J1" H 1668 3017 50  0000 C CNN
 F 1 "BATT_IN" H 1668 2926 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 1750 2800 50  0001 C CNN
+F 2 "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical" H 1750 2800 50  0001 C CNN
 F 3 "~" H 1750 2800 50  0001 C CNN
 	1    1750 2800
 	-1   0    0    -1  
@@ -549,7 +549,7 @@ L Connector_Generic:Conn_01x02 J2
 U 1 1 5E200241
 P 2750 1300
 F 0 "J2" H 2668 1517 50  0000 C CNN
-F 1 "GND" H 2668 1426 50  0000 C CNN
+F 1 "TP_GND" H 2668 1426 50  0000 C CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 2750 1300 50  0001 C CNN
 F 3 "~" H 2750 1300 50  0001 C CNN
 	1    2750 1300
@@ -1141,4 +1141,45 @@ Wire Wire Line
 Connection ~ 3500 6250
 Wire Wire Line
 	3500 6250 3500 6650
+$Comp
+L Connector_Generic:Conn_01x02 J7
+U 1 1 5E2EB662
+P 3350 1300
+F 0 "J7" H 3268 1517 50  0000 C CNN
+F 1 "+5V_OUT" H 3268 1426 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 3350 1300 50  0001 C CNN
+F 3 "~" H 3350 1300 50  0001 C CNN
+	1    3350 1300
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR032
+U 1 1 5E2EB66C
+P 3700 1450
+F 0 "#PWR032" H 3700 1200 50  0001 C CNN
+F 1 "GND" H 3705 1277 50  0000 C CNN
+F 2 "" H 3700 1450 50  0001 C CNN
+F 3 "" H 3700 1450 50  0001 C CNN
+	1    3700 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR031
+U 1 1 5E2F205B
+P 3700 1200
+F 0 "#PWR031" H 3700 1050 50  0001 C CNN
+F 1 "+5V" H 3715 1373 50  0000 C CNN
+F 2 "" H 3700 1200 50  0001 C CNN
+F 3 "" H 3700 1200 50  0001 C CNN
+	1    3700 1200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3550 1300 3700 1300
+Wire Wire Line
+	3700 1300 3700 1200
+Wire Wire Line
+	3550 1400 3700 1400
+Wire Wire Line
+	3700 1400 3700 1450
 $EndSCHEMATC
