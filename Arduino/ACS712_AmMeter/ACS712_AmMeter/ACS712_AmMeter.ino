@@ -1,5 +1,5 @@
 // ACS712 AmMeter
-// 2020.01.25
+// 2020.02.02
 //
 // ryood
 
@@ -10,15 +10,27 @@
 
 #define SERIAL_TX (0)
 
-#define VREF  (5000)       // 5V電源電圧(mV)
-#define PWR_V_DIV (2)      // バッテリー電圧の分圧比
-#define CALERT_MAX  (100)  // 警告音境界最大(mA)
-#define CALERT_MIN  (-100) // 警告音境界最小(mA)
+#define DISPLAY_CURRENT (0)
+#define DISPLAY_VOLTAGE (1)
+#define DISPLAY_RAW     (2)
+#define DISPLAY_MODE    (DISPLAY_CURRENT)
+
+// Analog Pins
+#define PIN_VBAT   (1)
+#define PIN_VPOS   (2)
+#define PIN_VNEG   (3)
+
+// Digital Pins
+#define PIN_BUZZER  (11)
+#define PIN_CAL_SW  (2)
+
+#define VREF  (5125)       // 5V電源電圧(mV)
+#define PWR_V_DIV (0.5f)      // バッテリー電圧の分圧比
+#define CALERT_MAX  (400)  // 警告音境界最大(mA)
+#define CALERT_MIN  (-400) // 警告音境界最小(mA)
 
 #define BUFFER_SIZE  (20)
 #define DISPLAY_INTERVAL  (32)
-#define PIN_BUZZER  (11)
-#define PIN_CAL_SW  (10)
 
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
 
@@ -34,9 +46,9 @@ int count = 0;
 
 void readValue(long *raw0, long *raw1, long *raw2)
 {
-  buffer0[bufferIndex] = analogRead(0);
-  buffer1[bufferIndex] = analogRead(1);
-  buffer2[bufferIndex] = analogRead(2);
+  buffer0[bufferIndex] = analogRead(PIN_VPOS);
+  buffer1[bufferIndex] = analogRead(PIN_VNEG);
+  buffer2[bufferIndex] = analogRead(PIN_VBAT);
   bufferIndex++;
   if (bufferIndex == BUFFER_SIZE) {
     bufferIndex = 0; 
@@ -86,7 +98,7 @@ void setup()
   pinMode(PIN_CAL_SW, INPUT_PULLUP);
   
   u8g2.begin();
-  u8g2.setFlipMode(1);
+  //u8g2.setFlipMode(1);
   
 #if (SERIAL_TX)  
   Serial.begin(9600);
@@ -109,9 +121,9 @@ void loop()
   int v1 = (raw1 * VREF / 1024) + biasNegative;
   int v2 = raw2 * VREF / 1024;
   
-  int c0 = -(v0 - 2500) / 5; 
-  int c1 = -(v1 - 2500) / 5;
-  int pwrv = v2 * PWR_V_DIV;
+  int c0 = -(v0 - (VREF / 2)) / 5; 
+  int c1 = -(v1 - (VREF / 2)) / 5;
+  int pwrv = v2 / PWR_V_DIV;
 
   count++;
   if (count > DISPLAY_INTERVAL) {
@@ -129,17 +141,22 @@ void loop()
     char strBuffer0[16];
     char strBuffer1[16];
     char strBuffer2[16];
-    
+
+#if (DISPLAY_MODE == DISPLAY_CURRENT)
     sprintf(strBuffer0, "%+04dmA", c0);
     sprintf(strBuffer1, "%+04dmA", c1);
     sprintf(strBuffer2, "%4dmV %+3d %+3d", pwrv, biasPositive, biasNegative);
-
-/*
+#elif (DISPLAY_MODE == DISPLAY_VOLTAGE)
+    //読み取り電圧表示
+    sprintf(strBuffer0, "%d", v0);
+    sprintf(strBuffer1, "%d", v1);
+    sprintf(strBuffer2, "%d %d %d", v2, biasPositive, biasNegative);
+#else
     //読み取り直値表示
     sprintf(strBuffer0, "%d", raw0);
     sprintf(strBuffer1, "%d", raw1);
     sprintf(strBuffer2, "%d %d %d", raw2, biasPositive, biasNegative);
-*/
+#endif
     
     u8g2.clearBuffer();
     u8g2.setFont(u8g2_font_profont29_mf);

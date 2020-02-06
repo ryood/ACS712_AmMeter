@@ -6,8 +6,8 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "ACS712_AmMeter_Digital_Board"
-Date "2020-01-27"
-Rev "Ver. 0.93"
+Date "2020-01-29"
+Rev "Ver. 0.94"
 Comp "PNPN Manufactory"
 Comment1 ""
 Comment2 ""
@@ -20,7 +20,6 @@ NoConn ~ 1700 5050
 NoConn ~ 1700 5150
 NoConn ~ 1700 5250
 NoConn ~ 1700 5350
-NoConn ~ 1700 5450
 NoConn ~ 1700 5550
 NoConn ~ 1700 5650
 NoConn ~ 1700 5750
@@ -1046,12 +1045,12 @@ Wire Wire Line
 $Comp
 L power:GNDD #PWR08
 U 1 1 5E377BD9
-P 3500 6850
-F 0 "#PWR08" H 3500 6600 50  0001 C CNN
-F 1 "GNDD" H 3504 6695 50  0000 C CNN
-F 2 "" H 3500 6850 50  0001 C CNN
-F 3 "" H 3500 6850 50  0001 C CNN
-	1    3500 6850
+P 3500 6400
+F 0 "#PWR08" H 3500 6150 50  0001 C CNN
+F 1 "GNDD" H 3504 6245 50  0000 C CNN
+F 2 "" H 3500 6400 50  0001 C CNN
+F 3 "" H 3500 6400 50  0001 C CNN
+	1    3500 6400
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1115,32 +1114,19 @@ Wire Wire Line
 $Comp
 L Connector_Generic:Conn_01x02 J6
 U 1 1 5E2C9B1F
-P 4100 6550
-F 0 "J6" H 4018 6767 50  0000 C CNN
-F 1 "CAL_SW" H 4018 6676 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 4100 6550 50  0001 C CNN
-F 3 "~" H 4100 6550 50  0001 C CNN
-	1    4100 6550
-	1    0    0    -1  
+P 1300 5450
+F 0 "J6" H 1218 5667 50  0000 C CNN
+F 1 "CAL_SW" H 1218 5576 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 1300 5450 50  0001 C CNN
+F 3 "~" H 1300 5450 50  0001 C CNN
+	1    1300 5450
+	-1   0    0    -1  
 $EndComp
-Wire Wire Line
-	3800 6150 3800 6550
-Wire Wire Line
-	3800 6550 3900 6550
-Wire Wire Line
-	3400 6150 3800 6150
-Wire Wire Line
-	3900 6650 3500 6650
-Connection ~ 3500 6650
-Wire Wire Line
-	3500 6650 3500 6850
 Wire Wire Line
 	3500 5450 3500 6250
 Wire Wire Line
 	3950 6250 3500 6250
 Connection ~ 3500 6250
-Wire Wire Line
-	3500 6250 3500 6650
 $Comp
 L Connector_Generic:Conn_01x02 J7
 U 1 1 5E2EB662
@@ -1182,4 +1168,24 @@ Wire Wire Line
 	3550 1400 3700 1400
 Wire Wire Line
 	3700 1400 3700 1450
+Wire Wire Line
+	3500 6250 3500 6400
+$Comp
+L power:GNDD #PWR033
+U 1 1 5E32520B
+P 1550 6400
+F 0 "#PWR033" H 1550 6150 50  0001 C CNN
+F 1 "GNDD" H 1554 6245 50  0000 C CNN
+F 2 "" H 1550 6400 50  0001 C CNN
+F 3 "" H 1550 6400 50  0001 C CNN
+	1    1550 6400
+	1    0    0    -1  
+$EndComp
+NoConn ~ 3400 6150
+Wire Wire Line
+	1500 5450 1700 5450
+Wire Wire Line
+	1500 5550 1550 5550
+Wire Wire Line
+	1550 5550 1550 6400
 $EndSCHEMATC
