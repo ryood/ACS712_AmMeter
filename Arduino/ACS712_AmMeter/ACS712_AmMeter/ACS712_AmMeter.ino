@@ -1,5 +1,5 @@
 // ACS712 AmMeter
-// 2020.02.02
+// 2020.02.07
 //
 // ryood
 
@@ -25,7 +25,7 @@
 #define PIN_CAL_SW  (2)
 
 #define VREF  (5125)       // 5V電源電圧(mV)
-#define PWR_V_DIV (0.5f)      // バッテリー電圧の分圧比
+#define PWR_V_DIV (0.5f)   // バッテリー電圧の分圧比
 #define CALERT_MAX  (400)  // 警告音境界最大(mA)
 #define CALERT_MIN  (-400) // 警告音境界最小(mA)
 
@@ -117,8 +117,8 @@ void loop()
   
   readValue(&raw0, &raw1, &raw2);
     
-  int v0 = (raw0 * VREF / 1024) + biasPositive;
-  int v1 = (raw1 * VREF / 1024) + biasNegative;
+  int v0 = ((raw0 + biasPositive) * VREF / 1024);
+  int v1 = ((raw1 + biasNegative) * VREF / 1024);
   int v2 = raw2 * VREF / 1024;
   
   int c0 = -(v0 - (VREF / 2)) / 5; 
